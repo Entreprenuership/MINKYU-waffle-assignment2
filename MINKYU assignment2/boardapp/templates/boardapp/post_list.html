@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>글 </title>
+  </head>
+  <body>
+    {% if messages %}
+    <ul class="messages">
+      {% for msg in messages %}
+      <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="list">
+      <ul>
+        {% for obj in object_list %}
+        <li><a href="{% url 'post_detail' pk=obj.id %}">{{ obj.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="paginator">
+      {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">이전</a>
+      {% endif %}
+      <span class="current">
+        Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+      </span>
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">다음</a>
+      {% endif %}
+    </div>
+    <div class="footer">
+      <a href="{% url 'post_create' %}">글 작성</a>
+    </div>
+  </body>
+</html>
